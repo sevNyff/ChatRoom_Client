@@ -1,48 +1,83 @@
 .vbox {
-	-fx-alignment: center;
-	-fx-spacing: 15;
-	-fx-fill-width: true;
+    -fx-alignment: center;
+    -fx-spacing: 15;
+    -fx-fill-width: true;
+    -fx-background-color: linear-gradient(to bottom, #FFFFFF, #FFFFFF);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
 }
 
 .gameBoard {
-	-fx-alignment: center;
+    -fx-alignment: center;
+    -fx-background-color: #ffff00; /* Yellow background for the game board */
+    -fx-padding: 10px;
+    -fx-border-color: #333;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
 }
 
 .button {
-  -fx-font-weight: bold;
-  -fx-text-fill: #008000;
-  -fx-border-color: #000000;
-  -fx-border-width: 1px;
-  -fx-border-style: solid;
+    -fx-font-weight: bold;
+    -fx-text-fill: #008000;
+    -fx-background-color: linear-gradient(#ffd65b, #e68400);
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 2);
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#e68400, #ffd65b);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand;
 }
 
 .toolbar .button {
-  -fx-font-size: 14px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 0;
 }
 
 .toolbar .button:disabled {
-  -fx-opacity: 0.5;
-  -fx-text-fill: #808080;
+    -fx-opacity: 0.5;
+    -fx-text-fill: #808080;
 }
 
 .label {
-  -fx-font-size: 14px;
-  -fx-font-weight: bold;
-  -fx-text-fill: #000000;
-  -fx-alignment: center;
-  -fx-max-width: 9999;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+    -fx-max-width: 9999;
+    -fx-background-color: rgba(255,255,255,0.8);
+    -fx-padding: 5px;
 }
 
 .gameButton {
-  -fx-font-size: 12px;
-  -fx-pref-width: 30;
-  -fx-pref-height: 30;
+    -fx-font-size: 12px;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+    -fx-background-color: #ffffff; /* White background for buttons */
+    -fx-background-radius: 75px;
+    -fx-min-width: 75px;
+    -fx-min-height: 75px;
+    -fx-max-width: 75px;
+    -fx-max-height: 75px;
+    -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.7), 5, 0.0, 2, 2);
+}
+
+.gameButton:hover {
+    -fx-background-color: #f2f2f2; /* Slightly greyed on hover for effect */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 
 .valid {
-  -fx-text-fill: green;
+    -fx-text-fill: green;
+    -fx-font-style: italic;
 }
 
 .invalid {
-  -fx-text-fill: red;
+    -fx-text-fill: red;
+    -fx-font-style: italic;
 }

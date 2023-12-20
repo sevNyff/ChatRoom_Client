@@ -10,8 +10,10 @@ public class GameBoard extends GridPane {
 
 	public GameBoard() {
 		super();
+		this.setHgap(15); // Set horizontal gap
+		this.setVgap(15);
 
-		// Create the playing board: buttons in 3 columns & 3 rows
+		// Create the playing board: buttons in 7 columns & 6 rows
 		for (int col = 0; col < 7; col++) {
 			for (int row = 0; row < 6; row++) {
 				// Create
@@ -40,7 +42,7 @@ public class GameBoard extends GridPane {
 				if (board[row][col] > 0) buttons[row][col].setText("X");
 				else if (board[row][col] < 0) buttons[row][col].setText("O");
 				else buttons[row][col].setText(" ");
-				
+
 				buttons[row][col].setDisable(board[row][col] != 0 || game.getResult() == true);
 			}
 		}

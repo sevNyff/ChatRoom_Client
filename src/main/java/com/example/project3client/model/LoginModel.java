@@ -41,6 +41,7 @@ public class LoginModel {
 				User u = objectMapper2.readValue(body, User.class);
 				
 				token = u.getToken(); // Save the token - that's all we care about
+				System.out.println(token);
 			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
 			e.printStackTrace();

@@ -1,13 +1,19 @@
 package com.example.project3client.controller;
 
 import com.example.project3client.model.Connect4_Model;
+import com.example.project3client.model.LoginModel;
 import com.example.project3client.view.Connect4_View;
+import com.example.project3client.view.LoginToolBar;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 
 public class LoginController {
 	private final Connect4_View view;
 	private final Connect4_Model model;
+	private final LoginModel loginModel;
+	private final LoginToolBar loginToolBar;
+
 	
 	private boolean goodUser = false;
 	private boolean goodPassword = false;
@@ -15,6 +21,8 @@ public class LoginController {
 	public LoginController(Connect4_Model model, Connect4_View view) {
 		this.view = view;
 		this.model = model;
+        loginToolBar = new LoginToolBar();
+        loginModel = new LoginModel();
 
 		// Events concerning Login
 		view.toolsLogin.txtUser.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -29,7 +37,8 @@ public class LoginController {
 		
 		enableLoginButton();
 
-		view.toolsLogin.btnLogin.setOnAction(this::login_logout);
+		view.toolsLogin.btnLogin.setOnAction(this::login);
+		view.toolsLogin.btnLogout.setOnAction(this::logout);
 		
 		// On login, disable login controls - On logout, enable login controls
 		model.getTokenProperty().addListener((observable, oldValue, newValue) -> {
@@ -47,11 +56,26 @@ public class LoginController {
 		});
 	}
 	
-	private void login_logout(ActionEvent e) {
+	private void login(ActionEvent e) {
 		if (model.getTokenProperty().get() == null)
 			model.login(view.toolsLogin.txtUser.getText(), view.toolsLogin.txtPassword.getText());
 		else
 			model.logout(view.toolsLogin.txtUser.getText());
+	}
+
+	private void logout(ActionEvent e){
+		loginModel.logout(view.toolsServer.txtServer.getText(), view.toolsLogin.txtUser.getText());
+		updateLogoutButton(false);
+		showAlertMessage("You are logged out!");
+	}
+
+	private void showAlertMessage(String message) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+		alert.showAndWait();
+	}
+
+	public void updateLogoutButton(boolean loggedIn) {
+		Platform.runLater(() -> loginToolBar.btnLogout.setDisable(false));
 	}
 
 	private void validateUser(String newValue) {

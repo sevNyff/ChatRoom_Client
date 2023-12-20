@@ -30,6 +30,7 @@ public class GameModel {
 					.build();
 			
 			HttpResponse<String> response = HttpClient.newBuilder().build().send(request, BodyHandlers.ofString());
+			System.out.println("HTTP response: " + response);
 			if (response.statusCode() == 200) {
 				String body = response.body();
 				ObjectMapper objectMapper = new ObjectMapper();
