@@ -44,6 +44,7 @@ public class LoginController {
 		enableLoginButton();
 
 		view.toolsLogin.btnLogin.setOnAction(this::login);
+		view.toolsLogin.btnRegister.setOnAction(this::register);
 
 		
 		// On login, disable login controls - On logout, enable login controls
@@ -62,20 +63,27 @@ public class LoginController {
 		});
 	}
 
-	private void login(ActionEvent e) {
-		if (model.getTokenProperty().get() == null) {
-			model.login(view.toolsLogin.txtUser.getText(), view.toolsLogin.txtPassword.getText());
-			view.toolsLogin.btnLogin.setText("Logout");
-		} else {
-			model.logout(view.toolsLogin.txtUser.getText());
-			view.toolsLogin.btnLogin.setText("Login");
-			showAlertMessage("You are logged out!");
-		}
+	private void register(ActionEvent e) {
+		model.register(view.toolsLogin.txtUser.getText(), view.toolsLogin.txtPassword.getText());
 	}
 
-	private void showAlertMessage(String message) {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
-		alert.showAndWait();
+	private void login(ActionEvent e) {
+		try {
+			if (model.getTokenProperty().get() == null) {
+				String token = model.login(view.toolsLogin.txtUser.getText(), view.toolsLogin.txtPassword.getText());
+				if (token != null) {
+					view.toolsLogin.btnLogin.setText("Logout");
+					view.toolsLogin.btnRegister.setDisable(true);
+				}
+			} else {
+				model.logout(view.toolsLogin.txtUser.getText());
+				view.toolsLogin.btnLogin.setText("Login");
+				view.toolsLogin.btnRegister.setDisable(false);
+			}
+		} catch (Exception ex) {
+			 // For debugging purposes
+			System.out.println("An error occurred: " + ex.getMessage());
+		}
 	}
 
 	public boolean isLoggedIn() {

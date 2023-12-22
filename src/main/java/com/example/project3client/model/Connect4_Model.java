@@ -54,9 +54,14 @@ public class Connect4_Model {
 	}
 
 	// Login the given user, save the resulting token
-	public void login(String user, String password) {
+	public String login(String user, String password) {
 		String token = loginModel.login(serverAddress, user, password);
 		tokenProperty.set(token);
+        return token;
+    }
+
+	public void register(String user, String password){
+		loginModel.register(serverAddress, user, password);
 	}
 	
 	// Logout the user, destroy the token
