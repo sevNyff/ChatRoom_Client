@@ -17,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 
 public class LoginModel {
 
+
 	public String login(String serverAddress, String user, String password) {
 		String token = null;
 		User userQuery = new User();
@@ -32,19 +33,20 @@ public class LoginModel {
 					.timeout(Duration.of(3, ChronoUnit.SECONDS))
 					.POST(json_req)
 					.build();
-			
+
 			HttpResponse<String> response = HttpClient.newBuilder().build().send(request, BodyHandlers.ofString());
 			if (response.statusCode() == 200) {
 				String body = response.body();
 				ObjectMapper objectMapper2 = new ObjectMapper();
 				objectMapper2.registerModule(new JavaTimeModule()); // Needed, in order to use classes from java.time
 				User u = objectMapper2.readValue(body, User.class);
-				
+
 				token = u.getToken(); // Save the token - that's all we care about
 				System.out.println(token);
 			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
 			e.printStackTrace();
+
 		}
 		return token;
 	}

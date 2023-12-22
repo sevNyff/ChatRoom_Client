@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class LoginController {
 	private final Connect4_View view;
@@ -43,7 +44,7 @@ public class LoginController {
 		enableLoginButton();
 
 		view.toolsLogin.btnLogin.setOnAction(this::login);
-		view.toolsLogin.btnLogout.setOnAction(this::logout);
+
 		
 		// On login, disable login controls - On logout, enable login controls
 		model.getTokenProperty().addListener((observable, oldValue, newValue) -> {
@@ -60,38 +61,21 @@ public class LoginController {
 			});
 		});
 	}
-	
+
 	private void login(ActionEvent e) {
-		if (model.getTokenProperty().get() == null)
+		if (model.getTokenProperty().get() == null) {
 			model.login(view.toolsLogin.txtUser.getText(), view.toolsLogin.txtPassword.getText());
-		else
+			view.toolsLogin.btnLogin.setText("Logout");
+		} else {
 			model.logout(view.toolsLogin.txtUser.getText());
-		updateLogoutButton();
-		loginToolBar.btnLogin.setDisable(true);
-	}
-
-	private void logout(ActionEvent e){
-		if(isLoggedIn()) {
-			loginModel.logout(view.toolsServer.txtServer.getText(), view.toolsLogin.txtUser.getText());
-			updateLogoutButton();
+			view.toolsLogin.btnLogin.setText("Login");
 			showAlertMessage("You are logged out!");
-			loginToolBar.btnLogin.setDisable(false);
 		}
-
 	}
 
 	private void showAlertMessage(String message) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
 		alert.showAndWait();
-	}
-
-	public void updateLogoutButton() {
-		if(isLoggedIn()){
-				Platform.runLater(() -> loginToolBar.btnLogout.setDisable(false));
-			} else{
-			Platform.runLater(() -> loginToolBar.btnLogout.setDisable(true));
-			}
-
 	}
 
 	public boolean isLoggedIn() {

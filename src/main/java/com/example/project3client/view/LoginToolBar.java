@@ -8,7 +8,7 @@ public class LoginToolBar extends ToolBar {
 	public final Label lblPassword = new Label("Password");
 	public final PasswordField txtPassword = new PasswordField();
 	public final Button btnLogin = new Button("Login");
-	public final Button btnLogout = new Button("Logout");
+	public final Button btnRegister = new Button("Register");
 
 	public LoginToolBar() {
 		super();
@@ -17,7 +17,7 @@ public class LoginToolBar extends ToolBar {
 		this.getItems().add(lblPassword);
 		this.getItems().add(txtPassword);
 		this.getItems().add(btnLogin);
-		this.getItems().add(btnLogout);
+		this.getItems().add(btnRegister);
 		this.getStyleClass().add("toolbar");
 		this.setDisable(true);
 	}
