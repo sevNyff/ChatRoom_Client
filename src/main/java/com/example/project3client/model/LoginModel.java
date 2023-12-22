@@ -65,6 +65,7 @@ public class LoginModel {
 		} catch (URISyntaxException | IOException | InterruptedException e) {
 			// Do nothing - fall through
 		}
+		System.out.println("User is logged out");
 	}
 
 }

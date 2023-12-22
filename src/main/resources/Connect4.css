@@ -8,7 +8,7 @@
 
 .gameBoard {
     -fx-alignment: center;
-    -fx-background-color: #ffff00; /* Yellow background for the game board */
+    -fx-background-color: #ffff00; /* Yellow background for the game board*/
     -fx-padding: 10px;
     -fx-border-color: #333;
     -fx-border-width: 2px;
@@ -71,6 +71,38 @@
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
 }
+.redButton {
+    -fx-text-fill: #ffffff; /* White text */
+    /* Other properties as needed */
+    -fx-font-size: 12px;
+        -fx-padding: 0;
+        -fx-border-width: 0;
+        -fx-background-radius: 75px;
+        -fx-background-color: #ff0000; /* Red background */
+        -fx-min-width: 75px;
+        -fx-min-height: 75px;
+        -fx-max-width: 75px;
+        -fx-max-height: 75px;
+        /*-fx-effect: innershadow(two-pass-box, rgba(0, 255, 0, 1), 5, 0.0, 2, 2);*/
+
+}
+
+.blueButton {
+    -fx-text-fill: #ffffff; /* White text */
+    /* Other properties as needed */
+    -fx-font-size: 12px;
+            -fx-padding: 0;
+            -fx-border-width: 0;
+            -fx-background-color: #0000ff;
+            -fx-background-radius: 75px;
+            -fx-min-width: 75px;
+            -fx-min-height: 75px;
+            -fx-max-width: 75px;
+            -fx-max-height: 75px;
+            /*-fx-effect: innershadow(two-pass-box, rgba(0, 0, 0, 255), 5, 0.0, 2, 2);*/
+}
+
+
 
 .valid {
     -fx-text-fill: green;

@@ -54,7 +54,6 @@ public class GameController {
 			if (!found)
 				col++;
 		}
-		btn.setText("X");
 		model.move(row, col);
 	}
 }

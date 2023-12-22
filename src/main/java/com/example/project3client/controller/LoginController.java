@@ -1,6 +1,7 @@
 package com.example.project3client.controller;
 
 import com.example.project3client.model.Connect4_Model;
+import com.example.project3client.model.Game;
 import com.example.project3client.model.LoginModel;
 import com.example.project3client.view.Connect4_View;
 import com.example.project3client.view.LoginToolBar;
@@ -8,11 +9,14 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 
+import java.io.IOException;
+
 public class LoginController {
 	private final Connect4_View view;
 	private final Connect4_Model model;
 	private final LoginModel loginModel;
 	private final LoginToolBar loginToolBar;
+	private final Game game;
 
 	
 	private boolean goodUser = false;
@@ -23,6 +27,7 @@ public class LoginController {
 		this.model = model;
         loginToolBar = new LoginToolBar();
         loginModel = new LoginModel();
+		game = new Game();
 
 		// Events concerning Login
 		view.toolsLogin.txtUser.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -48,7 +53,7 @@ public class LoginController {
 				view.toolsLogin.txtPassword.setDisable(!enable);
 				view.toolsSetup.setDisable(enable);
 				
-				view.toolsLogin.btnLogin.setText( enable ? "Login" : "Logout");
+				//view.toolsLogin.btnLogin.setText( enable ? "Login" : "Logout");
 				
 				// Regardless of why we're here, ensure the playing field is disabled
 				view.gameBoard.setDisable(true);
@@ -61,12 +66,18 @@ public class LoginController {
 			model.login(view.toolsLogin.txtUser.getText(), view.toolsLogin.txtPassword.getText());
 		else
 			model.logout(view.toolsLogin.txtUser.getText());
+		updateLogoutButton();
+		loginToolBar.btnLogin.setDisable(true);
 	}
 
 	private void logout(ActionEvent e){
-		loginModel.logout(view.toolsServer.txtServer.getText(), view.toolsLogin.txtUser.getText());
-		updateLogoutButton(false);
-		showAlertMessage("You are logged out!");
+		if(isLoggedIn()) {
+			loginModel.logout(view.toolsServer.txtServer.getText(), view.toolsLogin.txtUser.getText());
+			updateLogoutButton();
+			showAlertMessage("You are logged out!");
+			loginToolBar.btnLogin.setDisable(false);
+		}
+
 	}
 
 	private void showAlertMessage(String message) {
@@ -74,10 +85,19 @@ public class LoginController {
 		alert.showAndWait();
 	}
 
-	public void updateLogoutButton(boolean loggedIn) {
-		Platform.runLater(() -> loginToolBar.btnLogout.setDisable(false));
+	public void updateLogoutButton() {
+		if(isLoggedIn()){
+				Platform.runLater(() -> loginToolBar.btnLogout.setDisable(false));
+			} else{
+			Platform.runLater(() -> loginToolBar.btnLogout.setDisable(true));
+			}
+
 	}
 
+	public boolean isLoggedIn() {
+		System.out.println(model.getTokenProperty());
+		return model.getTokenProperty() != null;
+	}
 	private void validateUser(String newValue) {
 		this.goodUser = newValue.length() >= 3;
 		Utility.setValidInvalidStyle(view.toolsLogin.txtUser, goodUser);
