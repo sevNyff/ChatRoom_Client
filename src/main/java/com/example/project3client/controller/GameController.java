@@ -23,7 +23,7 @@ public class GameController {
 					Game game = (Game) newValue;
 					view.gameBoard.updateGame(game);
 					if (game.getResult() == true) {
-						view.lblResult.setText("Game Over!");
+						model.showAlert("Game Over!");
 						view.toolsSetup.setDisable(false);
 						view.gameBoard.setDisable(true);
 					}

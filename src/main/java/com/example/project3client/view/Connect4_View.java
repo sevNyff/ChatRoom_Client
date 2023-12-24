@@ -15,14 +15,14 @@ public class Connect4_View {
 	public final LoginToolBar toolsLogin = new LoginToolBar();
 	public final SetupToolBar toolsSetup = new SetupToolBar();	
 	public final GameBoard gameBoard = new GameBoard();
-	public final Label lblResult = new Label();
+
 	
 	public Connect4_View(Stage stage, Connect4_Model model) {
 		this.model = model;
 		this.stage = stage;
 
 		// Create the root layout
-		VBox root  = new VBox(toolsServer, toolsLogin, toolsSetup, gameBoard, lblResult);
+		VBox root  = new VBox(toolsServer, toolsLogin, toolsSetup, gameBoard);
 		root.getStyleClass().add("vbox");
 		
 		// Create the scene using our layout; then display it

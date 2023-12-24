@@ -1,6 +1,7 @@
 package com.example.project3client.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.net.URI;
@@ -40,6 +41,11 @@ public class GameModel {
 			e.printStackTrace();
 		}
 		return game;
+	}
+
+	public void showAlertMessage(String message) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+		alert.showAndWait();
 	}
 	
 }

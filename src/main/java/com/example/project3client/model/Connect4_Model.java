@@ -97,4 +97,7 @@ public class Connect4_Model {
 		this.gameProperty.set(null);
 		this.gameProperty.set(game);
 	}
+	public void showAlert(String message){
+		gameModel.showAlertMessage(message);
+	}
 }
